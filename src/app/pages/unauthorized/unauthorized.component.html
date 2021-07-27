@@ -1,0 +1,14 @@
+<div
+ fxLayout="column wrap"
+ fxLayoutGap="20px"
+ fxFill
+ fxLayoutAlign="center center"
+ class="container">
+   <div>
+      <h1><mat-icon>lock</mat-icon> Unauthorized</h1>
+      <h3>Oops! You are not allowed to access this page!</h3>
+   </div>
+    <div class="error" *ngIf="debug">
+      <p>{{ error }}</p>
+  </div>
+</div>
