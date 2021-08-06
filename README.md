@@ -1,6 +1,32 @@
 # Angular Msal with Azure AD
 
-## Configure
+
+## Configure Azure AD
+
+- Init Terraform
+
+```
+cd terraform
+terraform init
+```
+
+- Import App Registration and Service principal if already exist
+
+```
+terraform import module.azuread_app_frontend.azuread_application.main <OBJECT_ID>
+terraform import module.azuread_app_frontend.azuread_service_principal.main <OBJECT_ID>
+terraform import module.azuread_app_backend.azuread_application.main <OBJECT_ID>
+```
+
+- Deploy
+
+```
+terraform apply
+```
+
+- Assign user to frontend
+
+## Configure MSAL
 
 Complete environment file:
 
