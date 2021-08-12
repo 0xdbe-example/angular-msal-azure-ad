@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './layouts/header/header.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { AccountComponent } from './components/account/account.component';
+import { CallbackComponent } from './components/callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AccountComponent } from './components/account/account.component';
     LoginComponent,
     HeaderComponent,
     UnauthorizedComponent,
-    AccountComponent
+    AccountComponent,
+    CallbackComponent
   ],
   imports: [
     AppRoutingModule,

@@ -8,6 +8,7 @@ import { PublicComponent } from './layouts/public/public.component'
 import { PrivateComponent } from './layouts/private/private.component'
 
 import { AccountComponent } from './components/account/account.component'
+import { CallbackComponent } from './components/callback/callback.component'
 import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './pages/login/login.component'
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component'
@@ -15,7 +16,7 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 const routes: Routes = [
   {
     path: 'callback',
-    component: MsalRedirectComponent,
+    component: CallbackComponent, /*MsalRedirectComponent,*/
   },
   {
     path: '',

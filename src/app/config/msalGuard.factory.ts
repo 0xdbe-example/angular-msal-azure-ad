@@ -17,6 +17,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
       authRequest: {
         scopes: scopes
       },
-      loginFailedRoute: '/pages/error403'
+      loginFailedRoute: '/unauthorized'
   };
 }
