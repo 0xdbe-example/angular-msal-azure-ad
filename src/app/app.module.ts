@@ -26,10 +26,10 @@ import { MSALInterceptorConfigFactory } from './config/msalInterceptor.factory';
 import { HomeComponent } from './components/home/home.component';
 import { PublicComponent } from './layouts/public/public.component';
 import { PrivateComponent } from './layouts/private/private.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './layouts/header/header.component';
-import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { AccountComponent } from './components/account/account.component';
 import { CallbackComponent } from './components/callback/callback.component';
 

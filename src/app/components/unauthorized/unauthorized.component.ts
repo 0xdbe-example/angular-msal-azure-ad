@@ -13,13 +13,11 @@ export class UnauthorizedComponent implements OnInit {
   debug: boolean = environment.debug.msal;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-
     this.error = this.authService.error ? this.authService.error.message : null
-
   }
 
 }

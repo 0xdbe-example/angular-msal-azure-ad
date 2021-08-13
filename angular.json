@@ -111,9 +111,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "angular-msal-azure-ad-guard"
+  "defaultProject": "angular-msal-azure-ad-guard",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

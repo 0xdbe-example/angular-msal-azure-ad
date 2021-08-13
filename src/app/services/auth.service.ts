@@ -22,24 +22,19 @@ export class AuthService {
     private msalService: MsalService,
     private router: Router,
   ) {
-
     // Load current authentication state
     this.authenticationInit();
-
     // Authentication Progress
     this.msalBroadcastService.inProgress$.subscribe({
       next: (status: InteractionStatus) => {
-
         if (environment.debug.msal) {
           console.log(`MSAL Interaction Status: ${status}`);
         }
-
-        if (status === InteractionStatus.None){
+        if (status === InteractionStatus.None) {
           this.authenticationPending.next(false);
         } else {
           this.authenticationPending.next(true);
         }
-
       }
     });
 
@@ -49,26 +44,31 @@ export class AuthService {
         if (environment.debug.msal) {
           console.log(`MSAL Event Type: ${event.eventType}`);
         }
-        switch(event.eventType){
-          case EventType.LOGIN_SUCCESS: case EventType.ACQUIRE_TOKEN_SUCCESS:
+        switch(event.eventType) {
+          case EventType.LOGIN_SUCCESS: case EventType.ACQUIRE_TOKEN_SUCCESS: {
             console.log("LOGIN_SUCCESS");
             let payload = event.payload as AuthenticationResult
             this.actionLogin(payload.account);
             break;
-          case EventType.LOGOUT_SUCCESS:
+          }
+          case EventType.LOGOUT_SUCCESS: {
             console.log("logout")
             this.actionLogout();
             break;
-          case EventType.LOGIN_FAILURE : case EventType.ACQUIRE_TOKEN_FAILURE:
+          }
+          case EventType.LOGIN_FAILURE : case EventType.ACQUIRE_TOKEN_FAILURE: {
             this.actionLoginFailure(event.error);
             break;
+          }
+          default: {
+            break;
+          }
         }
       }
     });
-
   }
 
-  actionLogin(account: AccountInfo | null){
+  actionLogin(account: AccountInfo | null) {
     if (account) {
       // Active user account
       this.msalService.instance.setActiveAccount(account);
@@ -78,49 +78,47 @@ export class AuthService {
     }
   }
 
-  actionLogout(){
+  actionLogout() {
     this.authenticated.next(false);
     this.userData = null;
     this.router.navigate(['/']);
   }
 
-  actionLoginFailure(error : any){
+  actionLoginFailure(error : any) {
     this.authenticated.next(false);
     this.userData = null;
     this.error = error;
     this.router.navigate(['/unauthorized']);
   }
 
-  authenticationInit(){
-    if (!this.msalService.instance.getActiveAccount() || this.msalService.instance.getAllAccounts.length > 0){
+  authenticationInit() {
+    if (!this.msalService.instance.getActiveAccount() || this.msalService.instance.getAllAccounts.length > 0) {
       // Enable the first existing account
       let accounts = this.msalService.instance.getAllAccounts()
       this.actionLogin(accounts[0]);
     }
   }
 
-  login(){
+  login() {
     let backends = environment.aad.backends;
     let scopes: string[] = [];
-
     backends.forEach(function(backend) {
       scopes.push(...backend.scopes)
     });
-
     this.msalService.loginRedirect({
       redirectUri: environment.aad.redirectUri,
       scopes: scopes
     });
   }
 
-  logout(){
+  logout() {
     // logout without SLO
     this.msalService.instance.logoutRedirect({
       onRedirectNavigate: (url) => { return false;}
     });
   }
 
-  redirectAuhenticatedUserToHome(){
+  redirectAuhenticatedUserToHome() {
     // Redirect user if is already authenticated
     this.authenticationPending
     .pipe(

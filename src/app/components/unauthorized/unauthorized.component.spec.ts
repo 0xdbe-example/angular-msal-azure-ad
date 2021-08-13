@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AuthService } from '../../services/auth.service'
 import { UnauthorizedComponent } from './unauthorized.component';
 
 describe('UnauthorizedComponent', () => {
@@ -8,7 +8,13 @@ describe('UnauthorizedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UnauthorizedComponent ]
+      declarations: [ UnauthorizedComponent ],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: jasmine.createSpyObj('AuthService', ['error'])
+        }
+      ]
     })
     .compileComponents();
   });

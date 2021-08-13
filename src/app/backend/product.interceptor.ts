@@ -32,7 +32,6 @@ export class ProductInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
   //   Observable<HttpEvent<any>> {
   //     return of(new HttpResponse({ status: 200, body: productData }));
-  //   
      return next.handle(request);
   }
 }

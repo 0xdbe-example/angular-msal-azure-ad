@@ -15,7 +15,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     },
     cache: {
       cacheLocation: 'sessionStorage',
-      storeAuthStateInCookie: false,
+      storeAuthStateInCookie: false
     },
     system: {
       loggerOptions: {

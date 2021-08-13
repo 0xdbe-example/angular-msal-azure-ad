@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { AuthService } from '../../services/auth.service'
 import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
@@ -8,7 +8,13 @@ describe('AccountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountComponent ]
+      declarations: [ AccountComponent ],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: jasmine.createSpyObj('AuthService', ['userData'])
+        }
+      ]
     })
     .compileComponents();
   });

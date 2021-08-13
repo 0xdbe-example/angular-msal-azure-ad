@@ -3,54 +3,31 @@ import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
 
 import { environment } from '@environments/environment';
-
 import { PublicComponent } from './layouts/public/public.component'
 import { PrivateComponent } from './layouts/private/private.component'
-
 import { AccountComponent } from './components/account/account.component'
 import { CallbackComponent } from './components/callback/callback.component'
 import { HomeComponent } from './components/home/home.component'
-import { LoginComponent } from './pages/login/login.component'
-import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component'
+import { LoginComponent } from './components/login/login.component'
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component'
 
 const routes: Routes = [
-  {
-    path: 'callback',
-    component: CallbackComponent, /*MsalRedirectComponent,*/
-  },
   {
     path: '',
     component: PublicComponent,
     children: [
-      {
-        path: '',
-        component: LoginComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'unauthorized',
-        component: UnauthorizedComponent
-      }
+      { path: '', component: LoginComponent, pathMatch: 'full'},
+      { path: 'login', component: LoginComponent },
+      { path: 'unauthorized', component: UnauthorizedComponent},
+      { path: 'callback', component: CallbackComponent }
     ]
   },
   {
     path: '',
     component: PrivateComponent,
     children: [
-      {
-        path: 'account',
-        component: AccountComponent,
-
-      },
-      {
-        path: 'home',
-        component: HomeComponent,
-
-      }
+      { path: 'account', component: AccountComponent },
+      { path: 'home', component: HomeComponent }
     ],
     canActivate: [ MsalGuard ]
   }
