@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
+import { MsalGuard } from '@azure/msal-angular';
 
 import { environment } from '@environments/environment';
 import { PublicComponent } from './layouts/public/public.component'
