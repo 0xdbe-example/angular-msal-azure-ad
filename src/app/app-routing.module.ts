@@ -9,6 +9,7 @@ import { AccountComponent } from './components/account/account.component'
 import { CallbackComponent } from './components/callback/callback.component'
 import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component'
+import { ProductComponent } from './component/product/product.component'
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component'
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     component: PrivateComponent,
     children: [
       { path: 'account', component: AccountComponent },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'product', component: ProductComponent }
     ],
     canActivate: [ MsalGuard ]
   }

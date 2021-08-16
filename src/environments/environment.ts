@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  fakeBackend: false,
   debug: {
     msal: true,
     router: true,

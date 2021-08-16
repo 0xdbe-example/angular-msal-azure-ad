@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -32,6 +33,9 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { AccountComponent } from './components/account/account.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { ProductInterceptor } from './backend/product.interceptor';
+import { ProductComponent } from './component/product/product.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +47,8 @@ import { CallbackComponent } from './components/callback/callback.component';
     HeaderComponent,
     UnauthorizedComponent,
     AccountComponent,
-    CallbackComponent
+    CallbackComponent,
+    ProductComponent
   ],
   imports: [
     AppRoutingModule,
@@ -52,6 +57,7 @@ import { CallbackComponent } from './components/callback/callback.component';
     FlexLayoutModule,
     HttpClientModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
@@ -63,6 +69,11 @@ import { CallbackComponent } from './components/callback/callback.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProductInterceptor,
       multi: true
     },
     {

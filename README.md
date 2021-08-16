@@ -28,11 +28,12 @@ terraform apply
 
 ## Configure MSAL
 
-Complete environment file:
+Complete environment file for testing purpose:
 
 ```typescript
 export const environment = {
     production: false,
+    fakeBackend: true,
     debug: {
         msal: true,
         router: true,
@@ -44,8 +45,8 @@ export const environment = {
         backends: [
             {
                 uri: 'https://localhost:3000',
-                scopes: ['api://helloworld.com/user_impersonation']
-            }
+                scopes: ['api://msal4angular-dev/product:write', 'api://msal4angular-dev/product:read']
+            },
         ]
     }
 };
