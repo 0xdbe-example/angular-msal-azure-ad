@@ -34,7 +34,7 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { AccountComponent } from './components/account/account.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { ProductInterceptor } from './backend/product.interceptor';
-import { ProductComponent } from './component/product/product.component';
+import { ProductComponent } from './components/product/product.component';
 
 
 @NgModule({

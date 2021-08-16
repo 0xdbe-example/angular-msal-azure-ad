@@ -48,16 +48,16 @@ export class AuthService {
           case EventType.LOGIN_SUCCESS: case EventType.ACQUIRE_TOKEN_SUCCESS: {
             console.log("LOGIN_SUCCESS");
             let payload = event.payload as AuthenticationResult
-            this.actionLogin(payload.account);
+            this.eventLogin(payload.account);
             break;
           }
           case EventType.LOGOUT_SUCCESS: {
             console.log("logout")
-            this.actionLogout();
+            this.eventLogout();
             break;
           }
           case EventType.LOGIN_FAILURE : case EventType.ACQUIRE_TOKEN_FAILURE: {
-            this.actionLoginFailure(event.error);
+            this.eventLoginFailure(event.error);
             break;
           }
           default: {
@@ -68,7 +68,7 @@ export class AuthService {
     });
   }
 
-  actionLogin(account: AccountInfo | null) {
+  eventLogin(account: AccountInfo | null) {
     if (account) {
       // Active user account
       this.msalService.instance.setActiveAccount(account);
@@ -78,13 +78,13 @@ export class AuthService {
     }
   }
 
-  actionLogout() {
+  eventLogout() {
     this.authenticated.next(false);
     this.userData = null;
     this.router.navigate(['/']);
   }
 
-  actionLoginFailure(error : any) {
+  eventLoginFailure(error : any) {
     this.authenticated.next(false);
     this.userData = null;
     this.error = error;
@@ -95,7 +95,7 @@ export class AuthService {
     if (!this.msalService.instance.getActiveAccount() || this.msalService.instance.getAllAccounts.length > 0) {
       // Enable the first existing account
       let accounts = this.msalService.instance.getAllAccounts()
-      this.actionLogin(accounts[0]);
+      this.eventLogin(accounts[0]);
     }
   }
 
