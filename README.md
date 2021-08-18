@@ -24,7 +24,7 @@ terraform import module.azuread_app_backend.azuread_application.main <OBJECT_ID>
 terraform apply
 ```
 
-- Assign user to frontend
+- Assign user to frontend and backend
 
 ## Configure MSAL
 

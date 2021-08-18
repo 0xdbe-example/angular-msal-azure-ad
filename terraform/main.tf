@@ -20,7 +20,7 @@ locals {
 }
 
 module "azuread_app_backend" {
-  source                    = "git::https://github.com/0xdbe-terraform/terraform-azuread-app-backend.git?ref=v1.0.1"
+  source                    = "git::https://github.com/0xdbe-terraform/terraform-azuread-app-backend.git?ref=v1.0.2"
   application_short_name    = local.application_short_name
   application_environment   = local.application_environment
   application_api_scope     = local.backend_api_scope
