@@ -48,7 +48,16 @@ export const environment = {
                 scopes: ['api://msal4angular-dev/product:write', 'api://msal4angular-dev/product:read']
             },
         ]
-    }
+    },
+    contentSecurityPolicy:
+        "default-src 'none'; " +
+        "font-src https://fonts.gstatic.com; " +
+        "img-src 'self'; " +
+        "script-src 'self'; " +
+        "script-src-elem 'self'; " +
+        "style-src 'self' 'unsafe-inline';" +
+        "style-src-elem 'self' 'unsafe-inline'; " +
+        "connect-src 'self' https://localhost:3000 https://login.microsoftonline.com; "
 };
 ```
 
@@ -56,4 +65,36 @@ export const environment = {
 
 ```console
 npm run serve
+```
+
+## Build
+
+- Build
+
+```console
+npm run build
+```
+
+- Generate Self-signed certificate
+
+```console
+openssl req \
+  -x509 \
+  -subj "/C=FR/ST=Paris/L=Paris/O=Security/OU=IT Department/CN=www.example.com" \
+  -nodes \
+  -days 365 \
+  -newkey ec:<(openssl ecparam -name prime256v1) \
+  -keyout key.pem \
+  -out cert.pem
+```
+
+- Serve
+
+```console
+npx serve \
+    --ssl-cert tls/cert.pem \
+    --ssl-key tls/key.pem \
+    --listen 4200 \
+    --single \
+    dist/angular-msal-azure-ad-guard
 ```
