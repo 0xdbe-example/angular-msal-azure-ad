@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --disableHostCheck true --ssl=true",
-    "serve": "ng serve --disableHostCheck true --ssl=true --configuration development",
+    "start": "ng serve --disable-host-check true",
+    "serve": "ng serve --disable-host-check true --configuration development",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "cert": "mkdir -p ./tls & mkcert -cert-file ./tls/localhost-cert.pem -key-file ./tls/localhost-key.pem -ecdsa localhost 127.0.0.1 ::1"
   },
   "private": true,
   "dependencies": {

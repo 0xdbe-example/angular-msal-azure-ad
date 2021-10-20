@@ -1,7 +1,7 @@
 # Angular Msal with Azure AD
 
 
-## Configure Azure AD
+## Create Azure ressources
 
 - Init Terraform
 
@@ -24,7 +24,8 @@ terraform import module.azuread_app_backend.azuread_application.main <OBJECT_ID>
 terraform apply
 ```
 
-- Assign user to frontend and backend
+- Assign users to frontend and backend
+
 
 ## Configure MSAL
 
@@ -63,11 +64,19 @@ export const environment = {
 
 ## Run
 
+- Generate local certificate (using [mkcert](https://0xdbe.github.io/AngularSecurity-ServeApplicationLocallyOverHttps/))
+
+```console
+npm run cert
+```
+
+- Run locally
+
 ```console
 npm run serve
 ```
 
-## Build
+## Depoly
 
 - Build
 
@@ -75,26 +84,11 @@ npm run serve
 npm run build
 ```
 
-- Generate Self-signed certificate
+- Deploy
 
 ```console
-openssl req \
-  -x509 \
-  -subj "/C=FR/ST=Paris/L=Paris/O=Security/OU=IT Department/CN=www.example.com" \
-  -nodes \
-  -days 365 \
-  -newkey ec:<(openssl ecparam -name prime256v1) \
-  -keyout key.pem \
-  -out cert.pem
-```
-
-- Serve
-
-```console
-npx serve \
-    --ssl-cert tls/cert.pem \
-    --ssl-key tls/key.pem \
-    --listen 4200 \
-    --single \
-    dist/angular-msal-azure-ad-guard
+az storage blob upload-batch \
+    --source 'dist/angular-msal-azure-ad-guard' \
+    --destination '$web'  \
+    --account-name <ACCOUNT_NAME>
 ```
