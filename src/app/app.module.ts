@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
+  MsalBroadcastService,
   MsalGuard,
   MsalInterceptor,
   MsalModule,
@@ -64,8 +65,6 @@ import { ProductComponent } from './components/product/product.component';
     MsalModule
   ],
   providers: [
-    MsalGuard,
-    MsalService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
@@ -87,7 +86,10 @@ import { ProductComponent } from './components/product/product.component';
     {
       provide: MSAL_INTERCEPTOR_CONFIG,
       useFactory: MSALInterceptorConfigFactory
-    }
+    },
+    MsalService,
+    MsalBroadcastService,
+    MsalGuard,
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })
