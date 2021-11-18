@@ -35,6 +35,12 @@ export class AuthService {
         } else {
           this.authenticationPending.next(true);
         }
+      },
+      error: (error) => {
+        console.log('error: ', error);
+      },
+      complete: () => {
+        console.log('complete');
       }
     });
 
@@ -107,7 +113,8 @@ export class AuthService {
     });
     this.msalService.loginRedirect({
       redirectUri: environment.aad.redirectUri,
-      scopes: scopes
+      scopes: scopes,
+      prompt: 'select_account'
     });
   }
 

@@ -4,6 +4,12 @@ import { IPublicClientApplication,
 
 import { environment } from '@environments/environment';
 
+export function loggerCallback(LogLevel: any, message: any) {
+  if (environment.debug.msal) {
+    console.log(message);
+  }
+}
+
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
@@ -19,7 +25,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     },
     system: {
       loggerOptions: {
-        logLevel: LogLevel.Info,
+        loggerCallback,
+        logLevel: LogLevel.Verbose,
         piiLoggingEnabled: false
       }
     }
