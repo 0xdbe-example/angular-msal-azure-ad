@@ -114,11 +114,11 @@ export class AuthService {
   }
 
   login() {
-    let backends = environment.aad.backends;
-    let scopes: string[] = [];
-    backends.forEach(function(backend) {
-      scopes.push(...backend.scopes)
-    });
+    // Build list of scopes
+    const scopes: string[] = environment.aad.backends.reduce<string[]>(
+      (prevScopes, item) => [...prevScopes, ...item.scopes],
+      []
+    );
     this.msalService.loginRedirect({
       redirectUri: environment.aad.redirectUri,
       scopes: scopes,
