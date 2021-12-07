@@ -23,17 +23,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     // Redirect auhenticated user to home
     this.authService.redirectAuhenticatedUserToHome();
 
-    // Update authentication process status
-    this.authService.authenticationPending
-    .pipe(
-      filter((state: boolean) => state === false),
-      takeUntil(this._destroying$)
-    )
-    .subscribe({
-      next: (state) => {
-        this.authenticationPending = state;
-      }
-    })
+  // Update authentication process status
+  this.authService.authenticationPending
+  .pipe(
+    filter((state: boolean) => state === false),
+    takeUntil(this._destroying$)
+  )
+  .subscribe({
+    next: (state) => {
+      this.authenticationPending = state;
+    }
+  })
 
   }
 

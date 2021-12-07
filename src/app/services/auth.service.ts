@@ -22,8 +22,10 @@ export class AuthService {
     private msalService: MsalService,
     private router: Router,
   ) {
-    // Load current authentication state
-    this.authenticationInit();
+    // Init Service
+    this.activeFirstAccoutFromSessionStorage();
+    this.loadActiveAccount();
+
     // Authentication Progress
     this.msalBroadcastService.inProgress$.subscribe({
       next: (status: InteractionStatus) => {
@@ -54,16 +56,16 @@ export class AuthService {
           case EventType.LOGIN_SUCCESS: case EventType.ACQUIRE_TOKEN_SUCCESS: {
             console.log("LOGIN_SUCCESS");
             let payload = event.payload as AuthenticationResult
-            this.eventLogin(payload.account);
+            this.onLogin(payload.account);
             break;
           }
           case EventType.LOGOUT_SUCCESS: {
             console.log("logout")
-            this.eventLogout();
+            this.onLogout();
             break;
           }
           case EventType.LOGIN_FAILURE : case EventType.ACQUIRE_TOKEN_FAILURE: {
-            this.eventLoginFailure(event.error);
+            this.onLoginFailure(event.error);
             break;
           }
           default: {
@@ -74,7 +76,7 @@ export class AuthService {
     });
   }
 
-  eventLogin(account: AccountInfo | null) {
+  onLogin(account: AccountInfo | null) {
     if (account) {
       // Active user account
       this.msalService.instance.setActiveAccount(account);
@@ -84,24 +86,30 @@ export class AuthService {
     }
   }
 
-  eventLogout() {
+  onLogout() {
     this.authenticated.next(false);
     this.userData = null;
     this.router.navigate(['/']);
   }
 
-  eventLoginFailure(error : any) {
+  onLoginFailure(error : any) {
     this.authenticated.next(false);
     this.userData = null;
     this.error = error;
     this.router.navigate(['/unauthorized']);
   }
 
-  authenticationInit() {
-    if (!this.msalService.instance.getActiveAccount() || this.msalService.instance.getAllAccounts.length > 0) {
-      // Enable the first existing account
-      let accounts = this.msalService.instance.getAllAccounts()
-      this.eventLogin(accounts[0]);
+  activeFirstAccoutFromSessionStorage(){
+    let account = this.msalService.instance.getAllAccounts()[0]
+    if (account) {
+      this.msalService.instance.setActiveAccount(account);
+    }
+  }
+
+  loadActiveAccount() {
+    if (this.msalService.instance.getActiveAccount()){
+      this.userData = this.msalService.instance.getActiveAccount();
+      this.authenticated.next(!!this.userData);
     }
   }
 
