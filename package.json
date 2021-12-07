@@ -8,8 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
-    "cert": "mkdir -p ./tls & mkcert -cert-file ./tls/localhost-cert.pem -key-file ./tls/localhost-key.pem -ecdsa localhost 127.0.0.1 ::1"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -20,7 +19,7 @@
     "@angular/core": "~13.0.3",
     "@angular/flex-layout": "^12.0.0-beta.34",
     "@angular/forms": "~13.0.3",
-    "@angular/material": "^12.1.3",
+    "@angular/material": "^13.0.3",
     "@angular/platform-browser": "~13.0.3",
     "@angular/platform-browser-dynamic": "~13.0.3",
     "@angular/router": "~13.0.3",

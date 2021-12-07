@@ -4,8 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@environments/environment": ["src/environments/environment"],
-      "@azure/msal-angular": ["../../../../../../local/msal/microsoft-authentication-library-for-js/lib/msal-angular"]
+      "@environments/environment": ["src/environments/environment"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
