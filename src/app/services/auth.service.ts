@@ -14,7 +14,7 @@ export class AuthService {
 
   authenticated = new BehaviorSubject(false);
   authenticationPending = new BehaviorSubject(true);
-  userData: AccountInfo | null = null;
+  currentUser = new BehaviorSubject<AccountInfo | null>(null);
   error: EventError = null;
 
   constructor(
@@ -80,21 +80,20 @@ export class AuthService {
     if (account) {
       // Active user account
       this.msalService.instance.setActiveAccount(account);
-      this.userData = this.msalService.instance.getActiveAccount()
-      // change authentication state
-      this.authenticated.next(this.msalService.instance.getActiveAccount() ? true : false)
+      // Load account
+      this.loadActiveAccount();
     }
   }
 
   onLogout() {
     this.authenticated.next(false);
-    this.userData = null;
+    this.currentUser.next(null);
     this.router.navigate(['/']);
   }
 
   onLoginFailure(error : any) {
     this.authenticated.next(false);
-    this.userData = null;
+    this.currentUser.next(null);
     this.error = error;
     this.router.navigate(['/unauthorized']);
   }
@@ -108,8 +107,9 @@ export class AuthService {
 
   loadActiveAccount() {
     if (this.msalService.instance.getActiveAccount()){
-      this.userData = this.msalService.instance.getActiveAccount();
-      this.authenticated.next(!!this.userData);
+      var activeAccount = this.msalService.instance.getActiveAccount();
+      this.currentUser.next(activeAccount)
+      this.authenticated.next(activeAccount ? true : false);
     }
   }
 
