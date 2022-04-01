@@ -1,5 +1,5 @@
 {
-  "name": "angular-msal-azure-ad-guard",
+  "name": "angular-msal-azure-ad",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

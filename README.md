@@ -40,6 +40,7 @@ export const environment = {
         router: true,
     },
     aad: {
+        hostname: 'https://login.microsoftonline.com',
         clientId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
         tenantId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
         redirectUri: '/callback',
@@ -76,7 +77,7 @@ npm run cert
 npm run serve
 ```
 
-## Depoly
+## Deploy
 
 - Build
 
@@ -88,7 +89,7 @@ npm run build
 
 ```console
 az storage blob upload-batch \
-    --source 'dist/angular-msal-azure-ad-guard' \
+    --source 'dist/angular-msal-azure-ad' \
     --destination '$web'  \
     --account-name <ACCOUNT_NAME>
 ```

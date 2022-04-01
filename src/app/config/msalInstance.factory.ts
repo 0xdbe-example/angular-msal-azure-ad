@@ -14,10 +14,11 @@ export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
       clientId: environment.aad.clientId,
-      authority: 'https://login.microsoftonline.com/' + environment.aad.tenantId,
+      authority: 'https://' + environment.aad.hostname + '/' + environment.aad.tenantId,
       redirectUri: environment.aad.redirectUri,
       postLogoutRedirectUri: '/',
-      navigateToLoginRequestUrl: true
+      navigateToLoginRequestUrl: true,
+      knownAuthorities: ['https://' + environment.aad.hostname]
     },
     cache: {
       cacheLocation: 'sessionStorage',

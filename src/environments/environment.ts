@@ -10,6 +10,7 @@ export const environment = {
     router: true,
   },
   aad: {
+    hostname: '', // For Azure AD: https://login.microsoftonline.com
     clientId: '',
     tenantId: '',
     redirectUri: '',
